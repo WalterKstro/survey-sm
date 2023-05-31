@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+/*Routes for dashboard*/
+Route::get('admin', function(){
+    return view('dashboard.index');
+})->name('admin');
+
+
+/*Routes for public*/
