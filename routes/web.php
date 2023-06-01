@@ -21,3 +21,4 @@ Route::group(['prefix' => 'admin'], function(){
 
 
 /*Routes for public*/
+Route::view('/','public.home');
