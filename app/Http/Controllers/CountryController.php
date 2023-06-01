@@ -13,7 +13,7 @@ class CountryController extends Controller
     public function index()
     {
         //
-        return view('dashboard.index',[
+        return view('dashboard.country.index',[
             'countries' => Country::all()
         ]);
     }
@@ -24,7 +24,7 @@ class CountryController extends Controller
     public function create()
     {
         //
-        return view('dashboard.create');
+        return view('dashboard.country.create');
     }
 
     /**
@@ -40,7 +40,7 @@ class CountryController extends Controller
 
         $country = new Country( $validated );
         $country->save();
-        return to_route('country.index');
+        return to_route('dashboard.country.index');
     }
 
     /**
@@ -57,7 +57,7 @@ class CountryController extends Controller
     public function edit(Country $country)
     {
         //
-        return view('dashboard.edit',[
+        return view('dashboard.country.edit',[
             'country' => $country
         ]);
     }
@@ -75,7 +75,7 @@ class CountryController extends Controller
 
         $country->fill( $validated );
         $country->update();
-        return to_route('country.index');
+        return to_route('dashboard.country.index');
     }
 
     /**
@@ -85,6 +85,6 @@ class CountryController extends Controller
     {
         //
         $country->delete();
-        return to_route('country.index');
+        return to_route('dashboard.country.index');
     }
 }

@@ -14,11 +14,10 @@ use \App\Http\Controllers\CountryController;
 */
 
 /*Routes for dashboard*/
-Route::get('admin', function(){
-    return view('dashboard.dashboard');
-})->name('admin');
-
-Route::resource('admin/country',CountryController::class);
+Route::group(['prefix' => 'admin'], function(){
+    Route::view('/','dashboard.country.dashboard')->name('admin');
+    Route::resource('country',CountryController::class);
+});
 
 
 /*Routes for public*/
