@@ -10,8 +10,7 @@
 </head>
 <body>
 <div class="container">
-    <header>
-    </header>
+    <header></header>
     <main>
         {{ $slot  }}
     </main>

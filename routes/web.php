@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\CountryController;
+use \App\Http\Controllers\AuthenticationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,11 +15,17 @@ use \App\Http\Controllers\CountryController;
 */
 
 /*Routes for dashboard*/
-Route::group(['prefix' => 'admin'], function(){
+Route::group(['middleware'=>'auth','prefix' => '/admin'], function(){
     Route::view('/','dashboard.country.dashboard')->name('admin');
     Route::resource('country',CountryController::class);
+    Route::view('account','dashboard.account.create')->name('account');
+    Route::post('logout', [AuthenticationController::class,'destroy'])->name('authentication.destroy');
 });
 
 
 /*Routes for public*/
-Route::view('/','public.home');
+Route::group(['prefix'=>'/'],function() {
+    Route::view('','public.home');
+    Route::view('login','public.login')->name('login');
+    Route::post('login', [AuthenticationController::class,'store'])->name('authentication.store');
+});
