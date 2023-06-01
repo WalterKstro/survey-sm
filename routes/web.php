@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use \App\Http\Controllers\CountryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,8 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 /*Routes for dashboard*/
 Route::get('admin', function(){
-    return view('dashboard.index');
+    return view('dashboard.dashboard');
 })->name('admin');
+
+Route::resource('admin/country',CountryController::class);
 
 
 /*Routes for public*/
