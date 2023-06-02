@@ -6,3 +6,19 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
+
+## Requisitos
+- Tener instalado PHP globalmente (minimo la versión 8)
+- Tener composer instalado globalmente ``https://getcomposer.org/doc/00-intro.md``
+- Tener laravel instalado globalmente ``composer global require laravel/installer``
+- Pegar en la raiz del proyecto el archvio ``.env``
+- Crear una base de datos con el nombre: ``smsurvey`` e importar el backup de la base de datos
+    - En caso de que el servidor de base de datos, tenga un usuario diferente a root y una contraseña establecida, o un puerto diferente a 3306 debera de agregarse en el archvio ``.env``
+    - DB_PORT=' '
+    - DB_USERNAME=' '
+- Ejecutar el siguiente comando desde el root del proyecto ``composer install``
+- Ejecutar el siguiente comando, desde el root del proyecto
+    - ``npm i``
+- Ejecutar los siguientes comandos desde el root del proyecto
+    - ``php artisan serve``
+    - ``npm run dev``

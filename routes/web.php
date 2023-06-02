@@ -29,6 +29,7 @@ Route::group(['prefix'=>'/'],function() {
     Route::get('/',[SurveyController::class,'showOrigin'])->name('survey.showOrigin');
     Route::view('not-found','public.not-found')->name('not-found');
     Route::post('survey',[SurveyController::class,'showQuestions'])->name('survey.showQuestions');
+    Route::post('process',[SurveyController::class,'store'])->name('survey.store');
     Route::view('login','public.login')->name('login');
     Route::post('login', [AuthenticationController::class,'store'])->name('authentication.store');
 });
