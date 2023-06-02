@@ -40,7 +40,7 @@ class CountryController extends Controller
 
         $country = new Country( $validated );
         $country->save();
-        return to_route('dashboard.country.index');
+        return to_route('country.index');
     }
 
     /**
@@ -75,7 +75,7 @@ class CountryController extends Controller
 
         $country->fill( $validated );
         $country->update();
-        return to_route('dashboard.country.index');
+        return to_route('country.index');
     }
 
     /**
@@ -85,6 +85,6 @@ class CountryController extends Controller
     {
         //
         $country->delete();
-        return to_route('dashboard.country.index');
+        return to_route('country.index');
     }
 }

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\CountryController;
+use \App\Http\Controllers\SurveyController;
 use \App\Http\Controllers\AuthenticationController;
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +26,8 @@ Route::group(['middleware'=>'auth','prefix' => '/admin'], function(){
 
 /*Routes for public*/
 Route::group(['prefix'=>'/'],function() {
-    Route::view('','public.home');
+    Route::get('/',[SurveyController::class,'showOrigin'])->name('survey.showOrigin');
+    Route::post('survey',[SurveyController::class,'showQuestions'])->name('survey.showQuestions');
     Route::view('login','public.login')->name('login');
     Route::post('login', [AuthenticationController::class,'store'])->name('authentication.store');
 });
