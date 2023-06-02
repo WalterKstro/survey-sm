@@ -27,6 +27,7 @@ Route::group(['middleware'=>'auth','prefix' => '/admin'], function(){
 /*Routes for public*/
 Route::group(['prefix'=>'/'],function() {
     Route::get('/',[SurveyController::class,'showOrigin'])->name('survey.showOrigin');
+    Route::view('not-found','public.not-found')->name('not-found');
     Route::post('survey',[SurveyController::class,'showQuestions'])->name('survey.showQuestions');
     Route::view('login','public.login')->name('login');
     Route::post('login', [AuthenticationController::class,'store'])->name('authentication.store');

@@ -12,6 +12,9 @@ class SurveyController extends Controller
     public function showOrigin(Request $request) {
         $origins = Origin::all();
         $params = $request->all();
+        if( !$origins || !$params ){
+            return view('public.404');
+        }
         return view('public.home',compact('params','origins'));
     }
 
@@ -22,14 +25,17 @@ class SurveyController extends Controller
                     ->select('countries.id')
                     ->first();
 
-        $questions = Survey::join('questions','questions.survey_id','=','surveys.id')
-                    ->join('type_answers','type_answers.id','=','questions.type_answer_id')
-                    ->select('type_answers.type_data','questions.question')
-                    ->where('surveys.country_id','=',intval($idContry->id))
-                    ->where('surveys.origin_id','=',$idOrigin)
-                    ->get();
+        $questions = Survey::with(['questions','answers'])
+            ->where('surveys.country_id','=',intval($idContry->id))
+            ->where('surveys.origin_id','=',$idOrigin)
+            ->select(
+                'surveys.id','surveys.name','surveys.event_id','surveys.origin_id'
+            )
+            ->get();
 
-
+        if( count($questions) == 0 ){
+            return to_route('not-found');
+        }
         return view('public.survey',[
             'questions' => $questions
         ]);
