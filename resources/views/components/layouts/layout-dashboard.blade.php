@@ -9,11 +9,11 @@
     <title>San Martin | Dashboard</title>
 </head>
 <body>
-<div class="container">
-    <header>
+<div class="container mx-auto grid grid-cols-12">
+    <header class="col-start-1 col-span-2">
         @include('components.dashboard.navigation')
     </header>
-    <main>
+    <main class="col-start-3 col-span-10">
         {{ $slot  }}
     </main>
 </div>

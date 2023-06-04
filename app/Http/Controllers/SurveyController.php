@@ -12,8 +12,10 @@ use Illuminate\Support\Arr;
 class SurveyController extends Controller
 {
     public function showOrigin(Request $request) {
+
         $origins = Origin::all();
-        $params = $request->all();
+        //global params from url
+        $params = app('params');
 
         if( !$origins || !$params ){
             return view('public.404');
@@ -21,10 +23,14 @@ class SurveyController extends Controller
         return view('public.home',compact('params','origins'));
     }
 
-    public function showQuestions(Request $request) {
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create(Request $request) {
+        $params = app('params');
 
-        $idOrigin = intval($request->input('origin'));
-        $idContry = Country::where('int','=',$request->input('country'))
+        $idOrigin = intval($params['origin']);
+        $idContry = Country::where('int','=',$params['country'])
                     ->select('countries.id')->first();
 
         $questions = Survey::with(['questions'])
@@ -53,14 +59,6 @@ class SurveyController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -78,7 +76,7 @@ class SurveyController extends Controller
             $answer->box_id = Arr::get($listId,'box_id');
             $answer->save();
         }
-        return view('public.thanks');
+        return to_route('survey.thanks');
     }
 
     /**

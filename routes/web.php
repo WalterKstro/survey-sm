@@ -28,8 +28,10 @@ Route::group(['middleware'=>'auth','prefix' => '/admin'], function(){
 Route::group(['prefix'=>'/'],function() {
     Route::get('/',[SurveyController::class,'showOrigin'])->name('survey.showOrigin');
     Route::view('not-found','public.not-found')->name('not-found');
-    Route::post('survey',[SurveyController::class,'showQuestions'])->name('survey.showQuestions');
+    Route::post('survey',[SurveyController::class,'create'])->name('survey.create');
+    Route::get('survey',[SurveyController::class,'create'])->name('survey.create');
     Route::post('process',[SurveyController::class,'store'])->name('survey.store');
+    Route::view('thanks','public.thanks')->name('survey.thanks');
     Route::view('login','public.login')->name('login');
     Route::post('login', [AuthenticationController::class,'store'])->name('authentication.store');
 });
