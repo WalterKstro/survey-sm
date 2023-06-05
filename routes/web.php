@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\CountryController;
 use \App\Http\Controllers\SurveyController;
 use \App\Http\Controllers\AuthenticationController;
+use \App\Http\Controllers\QuestionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,8 +18,11 @@ use \App\Http\Controllers\AuthenticationController;
 
 /*Routes for dashboard*/
 Route::group(['middleware'=>'auth','prefix' => '/admin'], function(){
-    Route::view('/','dashboard.country.dashboard')->name('admin');
+    Route::view('/','dashboard.dashboard')->name('admin');
+    /*CRUD Country*/
     Route::resource('country',CountryController::class);
+    /*CRUD Questions*/
+    Route::resource('questions',QuestionController::class);
     Route::view('account','dashboard.account.create')->name('account');
     Route::post('logout', [AuthenticationController::class,'destroy'])->name('authentication.destroy');
 });

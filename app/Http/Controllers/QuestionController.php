@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
+use App\Models\Survey;
+use App\Models\TypeAnswer;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
@@ -13,6 +15,9 @@ class QuestionController extends Controller
     public function index()
     {
         //
+        return view('dashboard.questions.index',[
+            'questions' => Question::with('survey')->get()
+        ]);
     }
 
     /**
@@ -21,6 +26,10 @@ class QuestionController extends Controller
     public function create()
     {
         //
+        return view('dashboard.questions.create',[
+            'surveys' => Survey::all('id','name','active'),
+            'type_answers' => TypeAnswer::all('id','name')
+        ]);
     }
 
     /**
@@ -29,6 +38,16 @@ class QuestionController extends Controller
     public function store(Request $request)
     {
         //
+        $validated = $request->validate([
+            'question' => 'required',
+            'survey_id' => 'required',
+            'type_answer_id' => 'required',
+            'optional' => 'required'
+        ]);
+
+        $question  = new Question($validated);
+        $question->save();
+        return to_route('questions.index');
     }
 
     /**
